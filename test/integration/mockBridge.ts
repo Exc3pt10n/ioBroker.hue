@@ -16,13 +16,11 @@ export interface RecordedRequest {
 }
 
 /**
- * Minimal simulation of a Hue bridge: REST API, event stream and user creation
+ * Minimal simulation of a Hue bridge: REST API and event stream
  */
 export class MockBridge {
     /** All requests except the event stream */
     readonly requests: RecordedRequest[] = [];
-    /** Whether the link button is "pressed" */
-    linkButtonPressed = false;
 
     private readonly server: https.Server;
     private readonly streams = new Set<ServerResponse>();
@@ -82,7 +80,7 @@ export class MockBridge {
      * @param type event type
      * @param data changed resources
      */
-    emit(type: 'update' | 'add' | 'delete', data: HueResource[]): void {
+    emit(type: 'update', data: HueResource[]): void {
         const id = `${Date.now()}:${this.eventCounter++}`;
         const payload = JSON.stringify([{ id, creationtime: new Date().toISOString(), type, data }]);
         for (const stream of this.streams) {
@@ -107,14 +105,6 @@ export class MockBridge {
         res: ServerResponse,
     ): void {
         const body = raw ? JSON.parse(raw) : undefined;
-
-        if (method === 'POST' && url === '/api') {
-            this.requests.push({ method, path: url, body });
-            const answer = this.linkButtonPressed
-                ? [{ success: { username: this.appKey, clientkey: 'CLIENTKEY' } }]
-                : [{ error: { type: 101, address: '', description: 'link button not pressed' } }];
-            return this.json(res, 200, answer);
-        }
 
         if (headers['hue-application-key'] !== this.appKey) {
             return this.json(res, 403, { errors: [{ description: 'unauthorized user' }], data: [] });

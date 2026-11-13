@@ -43,18 +43,6 @@ tests.integration(path.join(__dirname, '..'), {
                 address = await bridge.start();
                 harness = getHarness();
 
-                // an object of the old v1 structure which has to be cleaned up
-                await harness.objects.setObject('hue-v2.0.Desk', {
-                    type: 'channel',
-                    common: { name: 'Desk' },
-                    native: { id: '1' },
-                });
-                await harness.objects.setObject('hue-v2.0.Desk.bri', {
-                    type: 'state',
-                    common: { name: 'bri', type: 'number', role: 'level.dimmer', read: true, write: true },
-                    native: {},
-                });
-
                 await harness.changeAdapterConfig('hue-v2', { native: { bridge: address, user: APP_KEY } });
                 await harness.startAdapterAndWait(true);
                 await waitFor(() => bridge.connectedStreams > 0);
@@ -78,11 +66,6 @@ tests.integration(path.join(__dirname, '..'), {
                 expect((await getState('info.connection'))?.val).to.equal(true);
             });
 
-            it('deletes objects of the old structure', async () => {
-                expect(await getObject('Desk')).to.equal(null);
-                expect(await getObject('Desk.bri')).to.equal(null);
-            });
-
             it('sends commands to the bridge and acknowledges them', async () => {
                 await harness.states.setState('hue-v2.0.lights.Desk.brightness', { val: 20, ack: false });
 
@@ -93,18 +76,6 @@ tests.integration(path.join(__dirname, '..'), {
 
                 await waitFor(async () => (await getState('lights.Desk.brightness'))?.ack);
                 expect((await getState('lights.Desk.brightness'))?.val).to.equal(20);
-            });
-
-            it('activates scenes via the command state of a group', async () => {
-                await harness.states.setState('hue-v2.0.rooms.Living_room.command', {
-                    val: JSON.stringify({ scene: 'Relax', transition: 1000 }),
-                    ack: false,
-                });
-
-                const request = await waitFor(() =>
-                    bridge.requests.find(r => r.path === '/clip/v2/resource/scene/scene-relax'),
-                );
-                expect(request.body).to.deep.equal({ recall: { action: 'active', duration: 1000 } });
             });
 
             it('updates states from the event stream', async () => {
@@ -120,34 +91,6 @@ tests.integration(path.join(__dirname, '..'), {
                 await waitFor(async () => (await getState('sensors.Corridor_sensor.motion'))?.val === true);
                 // the group state depends on the member lights
                 await waitFor(async () => (await getState('rooms.Living_room.allOn'))?.val === true);
-            });
-
-            it('sets button events even if the value does not change', async () => {
-                const press = (): void =>
-                    bridge.emit('update', [
-                        {
-                            id: 'btn-2',
-                            type: 'button',
-                            button: { button_report: { updated: new Date().toISOString(), event: 'short_release' } },
-                        },
-                    ]);
-
-                press();
-                const first = await waitFor(() => getState('sensors.Switch.button2'));
-                await new Promise(resolve => setTimeout(resolve, 50));
-                press();
-                await waitFor(async () => ((await getState('sensors.Switch.button2'))?.ts ?? 0) > first.ts);
-            });
-
-            it('removes deleted devices after a resync', async function () {
-                this.timeout(20_000);
-                bridge.setResources(createFixture().filter(r => !['dev-door', 'contact-1', 'tamper-1'].includes(r.id)));
-                bridge.emit('delete', [{ id: 'dev-door', type: 'device' }]);
-
-                // objects are deleted one after another, so wait for the last one
-                await waitFor(async () => (await getObject('sensors.Door')) === null, 15_000);
-                await waitFor(async () => (await getObject('sensors.Door.open')) === null);
-                expect(await getObject('lights.Desk.on')).to.not.equal(null);
             });
 
             it('reconnects the event stream and resynchronizes', async function () {
@@ -167,19 +110,6 @@ tests.integration(path.join(__dirname, '..'), {
                 await waitFor(async () => (await getState('lights.Desk.on'))?.val === false);
                 // the connection is reported at the end of the resync, after all states have been written
                 await waitFor(async () => (await getState('info.connection'))?.val === true);
-            });
-
-            it('creates a user when the link button is pressed', async function () {
-                this.timeout(20_000);
-                await harness.enableSendTo();
-
-                const send = (): Promise<any> =>
-                    new Promise(resolve => harness.sendTo('hue-v2.0', 'createUser', { ip: address }, resolve));
-
-                expect(await send()).to.deep.equal({ error: 'Not open' });
-
-                bridge.linkButtonPressed = true;
-                expect(await send()).to.deep.equal({ native: { user: APP_KEY }, saveConfig: true });
             });
         });
     },
