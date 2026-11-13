@@ -8,26 +8,30 @@
 > It is called `hue-v2` and can be installed **in parallel** to the official `hue` adapter: its instances (`hue-v2.0`, ...) have their own namespace and do not touch the objects of `hue.0`.
 
 ## Installation
-The adapter is not available in the ioBroker repository. Build a package and install it manually:
+The adapter is not published on npm and is installed directly from GitHub.
 
-1. Build the package (requires Node.js >= 22):
-   ```bash
-   git clone https://github.com/Exc3pt10n/ioBroker.hue-v2.git
-   cd ioBroker.hue-v2
-   npm ci
-   npm pack
-   ```
-   This creates `iobroker.hue-v2-<version>.tgz`.
-2. Copy the file to your ioBroker host and install it as the user running ioBroker:
-   ```bash
-   cd /opt/iobroker
-   sudo -u iobroker -H npm install /path/to/iobroker.hue-v2-<version>.tgz --omit=dev
-   iobroker upload hue-v2
-   iobroker add hue-v2
-   ```
-3. Configure the new instance in the admin UI. Create a **new** user on the bridge for it (link button), so it does not share its application key with the official adapter.
+**Admin UI:** tab *Adapters* → GitHub icon ("Install from custom URL", enable the expert mode if necessary) → tab *Custom* → enter the URL, install and create an instance afterwards:
 
-To update, install the new package the same way and restart the instance.
+```
+https://github.com/Exc3pt10n/ioBroker.hue-v2/tarball/master
+```
+
+**Console** on the ioBroker host:
+
+```bash
+iobroker url https://github.com/Exc3pt10n/ioBroker.hue-v2/tarball/master
+iobroker add hue-v2
+```
+
+> Note: ioBroker derives the adapter name from the repository name and is case-sensitive. The repository is called `ioBroker.hue-v2`, which matches the adapter name `hue-v2`. If the name is not detected correctly, pass it explicitly: `iobroker url <URL> hue-v2`.
+
+Instead of `master` any branch or commit can be used, e.g. to test a development version. Updates are installed the same way; the instance and its settings are kept.
+
+> When installing from GitHub, npm builds the adapter itself (script `prepare`). For this the development tools (TypeScript, ESLint, …) are downloaded once. This takes a few minutes on a Raspberry Pi and temporarily needs about 250 MB of disk space.
+
+After the installation, configure the new instance in the admin UI. Create a **new** user on the bridge for it (link button), so it does not share its application key with the official adapter.
+
+Requirements: js-controller >= 6.0.11, Admin >= 7.7.22, Node.js >= 22.19.0, Hue bridge v2 (square model) or newer.
 
 ## Description
 This adapter connects your Philips Hue bridge with ioBroker. It controls Philips Hue lights, Friends of Hue lamps, plugs and
@@ -133,19 +137,25 @@ This adapter is a complete rewrite based on the Hue API v2 and **not compatible*
 
 ## Changelog
 
-### **WORK IN PROGRESS**
-- (copilot) Adapter requires node.js >= 22.19.0 now
-- (claude) Renamed to `hue-v2`, so it can be installed in parallel to the official hue adapter
-- (claude) BREAKING: the adapter has been rewritten to use the Hue API v2 exclusively, see "Differences to the official hue adapter" for details
-- (claude) State changes are pushed by the bridge via the event stream, polling has been removed
-- (claude) Added support for zones, smart scenes, automations, tap dials, contact and tamper sensors
-- (claude) Commands are rate limited and merged to avoid overloading the bridge
-- (claude) Bridge discovery via mDNS and the Hue discovery service
-- (claude) Removed dependencies node-hue-api, hue-push-client and axios
 <!--
 	Placeholder for the next version (at the beginning of the line):
-	### __WORK IN PROGRESS__
+	### **WORK IN PROGRESS**
 -->
+
+### 4.0.0-alpha.1 (2026-11-13)
+- (Exc3pt10n) Installation directly from GitHub via "Install from custom URL", npm builds the adapter during the installation
+- (Exc3pt10n) Version tags are created automatically after a merge, the npm release workflow of the official adapter was removed
+
+### 4.0.0-alpha.0 (2026-11-13)
+- (Exc3pt10n) Renamed to `hue-v2`, so it can be installed in parallel to the official hue adapter
+- (Exc3pt10n) BREAKING: the adapter has been rewritten to use the Hue API v2 exclusively, see "Differences to the official hue adapter" for details
+- (Exc3pt10n) State changes are pushed by the bridge via the event stream, polling has been removed
+- (Exc3pt10n) Added support for zones, smart scenes, automations, tap dials, contact and tamper sensors
+- (Exc3pt10n) Commands are rate limited and merged to avoid overloading the bridge
+- (Exc3pt10n) Bridge discovery via mDNS and the Hue discovery service
+- (Exc3pt10n) Removed dependencies node-hue-api, hue-push-client and axios
+- (copilot) Adapter requires node.js >= 22.19.0 now
+
 ### 3.17.4 (2026-09-15))
 - (mcm1957) support to install from github has been dropped
 

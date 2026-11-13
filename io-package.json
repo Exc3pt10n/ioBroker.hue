@@ -1,9 +1,22 @@
 {
   "common": {
     "name": "hue-v2",
-    "version": "4.0.0-alpha.0",
+    "version": "4.0.0-alpha.1",
     "tier": 2,
     "news": {
+      "4.0.0-alpha.1": {
+        "en": "Installation directly from GitHub via \"Install from custom URL\", the adapter is built during installation",
+        "de": "Installation direkt aus GitHub über „Installieren aus eigener URL“, der Adapter wird bei der Installation gebaut",
+        "ru": "Установка напрямую с GitHub через «Установить из своего URL», адаптер собирается при установке",
+        "pt": "Instalação diretamente do GitHub via \"Instalar a partir de URL personalizado\", o adaptador é compilado durante a instalação",
+        "nl": "Installatie rechtstreeks vanaf GitHub via \"Installeren vanaf eigen URL\", de adapter wordt tijdens de installatie gebouwd",
+        "fr": "Installation directement depuis GitHub via « Installer depuis une URL personnalisée », l'adaptateur est compilé lors de l'installation",
+        "it": "Installazione direttamente da GitHub tramite \"Installa da URL personalizzato\", l'adattatore viene compilato durante l'installazione",
+        "es": "Instalación directamente desde GitHub mediante \"Instalar desde URL personalizada\", el adaptador se compila durante la instalación",
+        "pl": "Instalacja bezpośrednio z GitHuba przez „Zainstaluj z własnego adresu URL”, adapter jest budowany podczas instalacji",
+        "uk": "Встановлення безпосередньо з GitHub через «Встановити з власного URL», адаптер збирається під час встановлення",
+        "zh-cn": "可通过“从自定义 URL 安装”直接从 GitHub 安装，适配器在安装时构建"
+      },
       "4.0.0-alpha.0": {
         "en": "Fork of the hue adapter based on the Hue API v2, can be installed in parallel to the official hue adapter",
         "de": "Fork des hue-Adapters auf Basis der Hue API v2, kann parallel zum offiziellen hue-Adapter installiert werden",
