@@ -1,9 +1,22 @@
 {
   "common": {
     "name": "hue-v2",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "tier": 2,
     "news": {
+      "4.0.2": {
+        "en": "Security update of indirect dependencies; releases are published automatically, install from the branch \"release\" or as ready-built package",
+        "de": "Sicherheitsupdate indirekter Abhängigkeiten; Releases werden automatisch veröffentlicht, Installation über den Branch „release“ oder als fertig gebautes Paket",
+        "ru": "Обновление безопасности косвенных зависимостей; релизы публикуются автоматически, установка из ветки «release» или как готовый пакет",
+        "pt": "Atualização de segurança de dependências indiretas; as versões são publicadas automaticamente, instalação a partir do ramo \"release\" ou como pacote pré-compilado",
+        "nl": "Beveiligingsupdate van indirecte afhankelijkheden; releases worden automatisch gepubliceerd, installatie via de branch \"release\" of als kant-en-klaar pakket",
+        "fr": "Mise à jour de sécurité des dépendances indirectes ; les versions sont publiées automatiquement, installation depuis la branche « release » ou en paquet précompilé",
+        "it": "Aggiornamento di sicurezza delle dipendenze indirette; le release vengono pubblicate automaticamente, installazione dal branch \"release\" o come pacchetto già compilato",
+        "es": "Actualización de seguridad de dependencias indirectas; las versiones se publican automáticamente, instalación desde la rama \"release\" o como paquete precompilado",
+        "pl": "Aktualizacja bezpieczeństwa zależności pośrednich; wydania są publikowane automatycznie, instalacja z gałęzi „release” lub jako gotowy pakiet",
+        "uk": "Оновлення безпеки непрямих залежностей; релізи публікуються автоматично, встановлення з гілки «release» або як готовий пакет",
+        "zh-cn": "间接依赖项的安全更新；版本自动发布，可从 \"release\" 分支安装或作为预构建包安装"
+      },
       "4.0.1": {
         "en": "The instance object shows the name of the bridge, like the official hue adapter; rooms and zones list their lights in native.lights",
         "de": "Das Instanzobjekt zeigt den Namen der Bridge an, wie beim offiziellen hue-Adapter; Räume und Zonen führen ihre Lampen in native.lights",
