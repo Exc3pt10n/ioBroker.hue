@@ -1,7 +1,7 @@
 {
-  "name": "iobroker.hue",
-  "version": "3.17.4",
-  "description": "Connects Philips Hue LED Bulbs, Friends of Hue LED Lamps and Stripes and other SmartLink capable Devices (LivingWhites, some LivingColors) via Philips Hue Bridges",
+  "name": "iobroker.hue-v2",
+  "version": "4.0.0-alpha.0",
+  "description": "Connects Philips Hue lights, sensors, switches, rooms, zones and scenes via the Hue Bridge API v2",
   "author": "hobbyquaker <hq@ccu.io>",
   "contributors": [
     "hobbyquaker <hq@ccu.io>",
@@ -10,29 +10,27 @@
     "Moritz Heusinger <moritz.heusinger@gmail.com>",
     "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
   ],
-  "homepage": "https://github.com/iobroker-community-adapters/ioBroker.hue",
+  "homepage": "https://github.com/Exc3pt10n/ioBroker.hue-v2",
   "license": "Apache-2.0",
   "keywords": [
     "ioBroker",
     "hue",
+    "philips hue",
     "led",
     "rgb",
-    "smartlink",
     "zigbee",
     "home automation"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/iobroker-community-adapters/ioBroker.hue"
+    "url": "https://github.com/Exc3pt10n/ioBroker.hue-v2"
   },
   "engines": {
     "node": ">=22.19.0"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.4.3",
-    "axios": "^1.7.9",
-    "hue-push-client": "^1.0.5",
-    "node-hue-api": "^4.0.11"
+    "bonjour-service": "^1.4.4"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^5.2.1",
@@ -40,39 +38,38 @@
     "@alcalzone/release-script-plugin-license": "^5.2.2",
     "@alcalzone/release-script-plugin-manual-review": "^5.2.0",
     "@iobroker/adapter-dev": "^1.5.0",
-    "@iobroker/testing": "^6.3.0",
+    "@iobroker/eslint-config": "^2.3.4",
+    "@iobroker/testing": "^6.3.2",
     "@iobroker/types": "^7.2.5",
-    "@peter-murray/hue-bridge-model": "^2.1.1",
     "@tsconfig/node22": "^22.0.6",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
+    "@types/chai": "^4.3.20",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.20.5",
     "chai": "^4.3.10",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.5.6",
-    "gulp": "^4.0.2",
     "mocha": "^11.8.0",
     "prettier": "^3.9.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "scripts": {
-    "prebuild": "rimraf ./build",
+    "prebuild": "node -e \"require('node:fs').rmSync('build', { recursive: true, force: true })\"",
     "build:ts": "tsc -p tsconfig.build.json",
     "build": "npm run build:ts",
+    "prepack": "npm run build",
+    "check": "tsc --noEmit",
+    "lint": "eslint -c eslint.config.mjs .",
+    "test:unit": "mocha -r ts-node/register \"test/unit/**/*.test.ts\" --exit",
     "test:package": "mocha -r ts-node/register test/packageFiles.ts --exit",
     "test:integration": "mocha -r ts-node/register test/integrationAdapter.ts --exit",
-    "test": "mocha -r ts-node/register test/*.ts --exit",
-    "check": "tsc --noEmit",
-    "lint": "eslint .",
+    "test": "npm run test:unit && npm run test:package",
+    "translate": "translate-adapter",
     "release": "release-script",
     "release-patch": "release-script patch --yes",
     "release-minor": "release-script minor --yes",
-    "release-major": "release-script major --yes",
-    "translate": "translate-adapter"
+    "release-major": "release-script major --yes"
   },
   "bugs": {
-    "url": "https://github.com/iobroker-community-adapters/ioBroker.hue/issues"
+    "url": "https://github.com/Exc3pt10n/ioBroker.hue-v2/issues"
   },
   "main": "build/main.js",
   "files": [

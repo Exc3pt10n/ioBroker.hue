@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: '24.x'
           type-checking: true
-          lint: false
+          lint: true
 
   adapter-tests:
     needs: [check-and-lint]
@@ -40,8 +40,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        # all supported Node.js versions on Linux, plus one Windows job to cover platform differences
         node-version: [22.x, 24.x, 26.x]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
+        include:
+          - node-version: 24.x
+            os: windows-latest
 
     steps:
       - uses: ioBroker/testing-action-adapter@v1
@@ -73,7 +77,3 @@ jobs:
           build: true
           # npm-token: ${{ secrets.NPM_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
-          sentry-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          sentry-project: 'iobroker-hue'
-          sentry-version-prefix: 'iobroker.hue'
