@@ -144,8 +144,9 @@ tests.integration(path.join(__dirname, '..'), {
                 bridge.setResources(createFixture().filter(r => !['dev-door', 'contact-1', 'tamper-1'].includes(r.id)));
                 bridge.emit('delete', [{ id: 'dev-door', type: 'device' }]);
 
+                // objects are deleted one after another, so wait for the last one
                 await waitFor(async () => (await getObject('sensors.Door')) === null, 15_000);
-                expect(await getObject('sensors.Door.open')).to.equal(null);
+                await waitFor(async () => (await getObject('sensors.Door.open')) === null);
                 expect(await getObject('lights.Desk.on')).to.not.equal(null);
             });
 
@@ -164,7 +165,8 @@ tests.integration(path.join(__dirname, '..'), {
                 await waitFor(() => bridge.connectedStreams > 0, 15_000);
                 await waitFor(() => fullSyncs() > syncsBefore, 15_000);
                 await waitFor(async () => (await getState('lights.Desk.on'))?.val === false);
-                expect((await getState('info.connection'))?.val).to.equal(true);
+                // the connection is reported at the end of the resync, after all states have been written
+                await waitFor(async () => (await getState('info.connection'))?.val === true);
             });
 
             it('creates a user when the link button is pressed', async function () {
