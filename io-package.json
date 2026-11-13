@@ -1,9 +1,22 @@
 {
   "common": {
     "name": "hue-v2",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "tier": 2,
     "news": {
+      "4.0.1": {
+        "en": "The instance object shows the name of the bridge, like the official hue adapter; rooms and zones list their lights in native.lights",
+        "de": "Das Instanzobjekt zeigt den Namen der Bridge an, wie beim offiziellen hue-Adapter; Räume und Zonen führen ihre Lampen in native.lights",
+        "ru": "Объект экземпляра показывает имя моста, как в официальном адаптере hue; комнаты и зоны перечисляют свои лампы в native.lights",
+        "pt": "O objeto da instância mostra o nome da bridge, como no adaptador hue oficial; divisões e zonas listam as suas luzes em native.lights",
+        "nl": "Het instantieobject toont de naam van de bridge, zoals bij de officiële hue-adapter; kamers en zones vermelden hun lampen in native.lights",
+        "fr": "L'objet de l'instance affiche le nom du pont, comme l'adaptateur hue officiel; les pièces et zones listent leurs lampes dans native.lights",
+        "it": "L'oggetto dell'istanza mostra il nome del bridge, come l'adattatore hue ufficiale; stanze e zone elencano le loro luci in native.lights",
+        "es": "El objeto de la instancia muestra el nombre del puente, como el adaptador hue oficial; las habitaciones y zonas listan sus luces en native.lights",
+        "pl": "Obiekt instancji pokazuje nazwę mostka, tak jak oficjalny adapter hue; pokoje i strefy wymieniają swoje światła w native.lights",
+        "uk": "Об’єкт екземпляра показує назву моста, як в офіційному адаптері hue; кімнати та зони перелічують свої лампи в native.lights",
+        "zh-cn": "实例对象显示网桥名称，与官方 hue 适配器相同；房间和区域在 native.lights 中列出其灯具"
+      },
       "4.0.0": {
         "en": "First stable release of the adapter based on the Hue API v2",
         "de": "Erste stabile Version des Adapters auf Basis der Hue API v2",

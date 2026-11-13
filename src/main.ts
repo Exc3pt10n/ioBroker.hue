@@ -196,9 +196,11 @@ class Hue extends utils.Adapter {
         const desired = new Set<string>();
 
         for (const { id, obj } of model.objects) {
-            const fullId = `${this.namespace}.${id}`;
+            // an empty id is the instance object itself
+            const fullId = id ? `${this.namespace}.${id}` : this.namespace;
             desired.add(fullId);
-            const existing = existingObjects[fullId];
+            // the instance object itself is not part of the adapter objects
+            const existing = existingObjects[fullId] ?? (id ? undefined : await this.getForeignObjectAsync(fullId));
 
             const common: Record<string, unknown> = { ...obj.common };
             for (const prop of PRESERVED_COMMON_PROPERTIES) {
@@ -215,7 +217,7 @@ class Hue extends utils.Adapter {
                 JSON.stringify(existing.common) !== JSON.stringify(target.common) ||
                 JSON.stringify(existing.native) !== JSON.stringify(target.native)
             ) {
-                await this.setObject(id, target);
+                await this.setForeignObjectAsync(fullId, target);
             }
         }
 

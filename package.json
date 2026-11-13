@@ -1,6 +1,6 @@
 {
   "name": "iobroker.hue-v2",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Connects Philips Hue lights, sensors, switches, rooms, zones and scenes via the Hue Bridge API v2",
   "author": "hobbyquaker <hq@ccu.io>",
   "contributors": [

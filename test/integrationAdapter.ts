@@ -53,6 +53,11 @@ tests.integration(path.join(__dirname, '..'), {
             });
 
             it('creates objects and initial states', async () => {
+                // the instance object is named like the bridge
+                const instance = await harness.objects.getObject('hue-v2.0');
+                expect(instance?.type).to.equal('device');
+                expect(instance?.common.name).to.equal('Hue Upstairs');
+
                 const on = await getObject('lights.Desk.on');
                 expect(on?.common).to.include({ role: 'switch.light', type: 'boolean', write: true });
 
