@@ -1,9 +1,22 @@
 {
   "common": {
     "name": "hue-v2",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "tier": 2,
     "news": {
+      "4.0.1": {
+        "en": "The instance object shows the name of the bridge, like the official hue adapter",
+        "de": "Das Instanzobjekt zeigt den Namen der Bridge an, wie beim offiziellen hue-Adapter",
+        "ru": "Объект экземпляра показывает имя моста, как в официальном адаптере hue",
+        "pt": "O objeto da instância mostra o nome da bridge, como no adaptador hue oficial",
+        "nl": "Het instantieobject toont de naam van de bridge, zoals bij de officiële hue-adapter",
+        "fr": "L'objet de l'instance affiche le nom du pont, comme l'adaptateur hue officiel",
+        "it": "L'oggetto dell'istanza mostra il nome del bridge, come l'adattatore hue ufficiale",
+        "es": "El objeto de la instancia muestra el nombre del puente, como el adaptador hue oficial",
+        "pl": "Obiekt instancji pokazuje nazwę mostka, tak jak oficjalny adapter hue",
+        "uk": "Об’єкт екземпляра показує назву моста, як в офіційному адаптері hue",
+        "zh-cn": "实例对象显示网桥名称，与官方 hue 适配器相同"
+      },
       "4.0.0": {
         "en": "First stable release of the adapter based on the Hue API v2",
         "de": "Erste stabile Version des Adapters auf Basis der Hue API v2",

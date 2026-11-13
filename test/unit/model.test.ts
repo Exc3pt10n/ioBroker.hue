@@ -72,8 +72,21 @@ describe('model', () => {
         expect(ct.common.min).to.equal(2000);
         expect(ct.common.max).to.equal(6536);
 
-        // folders come first so they exist before their children
-        expect(model.objects[0].obj.type).to.equal('folder');
+        // the instance object and the folders come first so they exist before their children
+        expect(model.objects[0].id).to.equal('');
+        expect(model.objects[1].obj.type).to.equal('folder');
+    });
+
+    it('names the instance object like the bridge', () => {
+        const bridge = buildModel(new ResourceIndex(createFixture()), defaultOptions).objects.find(o => o.id === '')!;
+        expect(bridge.obj.type).to.equal('device');
+        expect(bridge.obj.common?.name).to.equal('Hue Upstairs');
+        expect(bridge.obj.native).to.include({ id: 'bridge-1', type: 'bridge', bridgeId: '001788fffe000000' });
+
+        // falls back to a generic name if the device of the bridge is unknown
+        const withoutDevice = createFixture().filter(r => r.id !== 'dev-bridge');
+        const fallback = buildModel(new ResourceIndex(withoutDevice), defaultOptions).objects.find(o => o.id === '')!;
+        expect(fallback.obj.common?.name).to.equal('Hue Bridge');
     });
 
     it('respects ignoreGroups and ignoreScenes', () => {

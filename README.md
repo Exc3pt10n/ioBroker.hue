@@ -66,6 +66,7 @@ Objects of devices which are removed from the bridge are deleted automatically.
 
 | Object                                  | Description                                                                         |
 |-----------------------------------------|-------------------------------------------------------------------------------------|
+| `hue-v2.0`                                 | The instance itself, named like the bridge                                          |
 | `hue-v2.0.lights.<name>`                   | A light                                                                             |
 | `hue-v2.0.rooms.<name>`                    | A room of the Hue app                                                               |
 | `hue-v2.0.zones.<name>`                    | A zone of the Hue app                                                               |
@@ -141,6 +142,9 @@ This adapter is a complete rewrite based on the Hue API v2 and **not compatible*
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+
+### 4.0.1 (2026-11-13)
+- (Exc3pt10n) The instance object (e.g. `hue-v2.0`) shows the name of the bridge, like the official hue adapter
 
 ### 4.0.0 (2026-11-13)
 - (Exc3pt10n) First stable release of the adapter based on the Hue API v2

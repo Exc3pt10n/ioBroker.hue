@@ -11,6 +11,7 @@ import type { HueResource } from '../src/lib/hue/types';
  * - room "Living room" with Desk and Hall, zone "Work" with Desk, bridge home
  * - two scenes and a smart scene in the living room
  * - an entertainment area and an automation
+ * - the bridge "Hue Upstairs" (device with bridge service)
  */
 export function createFixture(): HueResource[] {
     const resources: HueResource[] = [
@@ -322,6 +323,20 @@ export function createFixture(): HueResource[] {
             type: 'behavior_instance',
             metadata: { name: 'Wake up' },
             enabled: true,
+        },
+        {
+            id: 'dev-bridge',
+            type: 'device',
+            product_data: {
+                model_id: 'BSB002',
+                manufacturer_name: 'Signify Netherlands B.V.',
+                product_name: 'Hue Bridge',
+                product_archetype: 'bridge_v2',
+                certified: true,
+                software_version: '1.70.1970165000',
+            },
+            metadata: { name: 'Hue Upstairs', archetype: 'bridge_v2' },
+            services: [{ rid: 'bridge-1', rtype: 'bridge' }],
         },
         {
             id: 'bridge-1',

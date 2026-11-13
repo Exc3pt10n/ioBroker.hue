@@ -7,6 +7,7 @@ import { formatHexColor, formatXy, lightLevelToLux, mirekToKelvin, xyToRgb } fro
 import type { ResourceIndex } from './resourceIndex';
 import type {
     BehaviorInstanceResource,
+    BridgeResource,
     ButtonEvent,
     ButtonResource,
     ContactResource,
@@ -108,7 +109,7 @@ export type Entity =
 
 /** An object which has to exist in the adapter namespace */
 export interface ObjectDefinition {
-    /** Id relative to the adapter namespace */
+    /** Id relative to the adapter namespace, an empty string is the instance object itself (e.g. `hue-v2.0`) */
     id: string;
     /** The object itself */
     obj: ioBroker.SettableObject;
@@ -507,7 +508,41 @@ export function buildModel(index: ResourceIndex, options: ModelOptions, existing
         objects.unshift(containerObject(folder, 'folder', FOLDERS[folder]));
     }
 
+    const bridge = bridgeObject(index);
+    if (bridge) {
+        objects.unshift(bridge);
+    }
+
     return { objects, entities };
+}
+
+/**
+ * Create the instance object (e.g. `hue-v2.0`) as device named like the bridge, as the official hue adapter does
+ *
+ * @param index all resources
+ */
+function bridgeObject(index: ResourceIndex): ObjectDefinition | undefined {
+    const bridge = index.ofType<BridgeResource>('bridge')[0];
+    if (!bridge) {
+        return undefined;
+    }
+
+    // the name of the bridge is the name of the device which owns the bridge service
+    const device = index.deviceOf(bridge);
+    return {
+        id: '',
+        obj: {
+            type: 'device',
+            common: { name: device?.metadata.name || 'Hue Bridge' },
+            native: {
+                id: bridge.id,
+                type: 'bridge',
+                bridgeId: bridge.bridge_id,
+                modelId: device?.product_data.model_id,
+                softwareVersion: device?.product_data.software_version,
+            },
+        } as ioBroker.SettableObject,
+    };
 }
 
 /**
