@@ -8,26 +8,34 @@
 > It is called `hue-v2` and can be installed **in parallel** to the official `hue` adapter: its instances (`hue-v2.0`, ...) have their own namespace and do not touch the objects of `hue.0`.
 
 ## Installation
-The adapter is not published on npm and is installed directly from GitHub.
+The adapter is not published on npm and is installed directly from GitHub. Every release is built and tested automatically before it is published.
 
 **Admin UI:** tab *Adapters* → GitHub icon ("Install from custom URL", enable the expert mode if necessary) → tab *Custom* → enter the URL, install and create an instance afterwards:
 
 ```
-https://github.com/Exc3pt10n/ioBroker.hue-v2/tarball/master
+https://github.com/Exc3pt10n/ioBroker.hue-v2/tarball/release
 ```
 
 **Console** on the ioBroker host:
 
 ```bash
-iobroker url https://github.com/Exc3pt10n/ioBroker.hue-v2/tarball/master
+iobroker url https://github.com/Exc3pt10n/ioBroker.hue-v2/tarball/release
 iobroker add hue-v2
 ```
 
+The branch `release` always points to the latest release. Updates are installed the same way; the instance and its settings are kept.
+
 > Note: ioBroker derives the adapter name from the repository name and is case-sensitive. The repository is called `ioBroker.hue-v2`, which matches the adapter name `hue-v2`. If the name is not detected correctly, pass it explicitly: `iobroker url <URL> hue-v2`.
 
-Instead of `master` any branch or commit can be used, e.g. to test a development version. Updates are installed the same way; the instance and its settings are kept.
-
 > When installing from GitHub, npm builds the adapter itself (script `prepare`). For this the development tools (TypeScript, ESLint, …) are downloaded once. This takes a few minutes on a Raspberry Pi and temporarily needs about 250 MB of disk space.
+
+**Without building on the ioBroker host:** every [GitHub release](https://github.com/Exc3pt10n/ioBroker.hue-v2/releases) contains the ready-built package `iobroker.hue-v2-<version>.tgz`. Install it via its download URL:
+
+```bash
+iobroker url https://github.com/Exc3pt10n/ioBroker.hue-v2/releases/download/v<version>/iobroker.hue-v2-<version>.tgz hue-v2
+```
+
+**Development version:** `https://github.com/Exc3pt10n/ioBroker.hue-v2/tarball/master` installs the current state of the default branch, which may contain unreleased changes. Any other branch or commit can be used instead of `master` as well.
 
 After the installation, configure the new instance in the admin UI. Create a **new** user on the bridge for it (link button), so it does not share its application key with the official adapter.
 
@@ -142,6 +150,10 @@ This adapter is a complete rewrite based on the Hue API v2 and **not compatible*
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+
+### 4.0.2 (2026-11-13)
+- (Exc3pt10n) Security: updated the indirect dependencies `follow-redirects` (1.16.3) and `node-forge` (1.4.3)
+- (Exc3pt10n) Releases are built, tested and published automatically; install the latest release from the branch `release` or as ready-built package from the GitHub release
 
 ### 4.0.1 (2026-11-13)
 - (Exc3pt10n) The instance object (e.g. `hue-v2.0`) shows the name of the bridge, like the official hue adapter
