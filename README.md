@@ -145,6 +145,7 @@ This adapter is a complete rewrite based on the Hue API v2 and **not compatible*
 
 ### 4.0.1 (2026-11-13)
 - (Exc3pt10n) The instance object (e.g. `hue-v2.0`) shows the name of the bridge, like the official hue adapter
+- (Exc3pt10n) Rooms and zones list the ids of their lights in `native.lights` (the `native.id` of the light channels), e.g. for visualizations like SmartVis
 
 ### 4.0.0 (2026-11-13)
 - (Exc3pt10n) First stable release of the adapter based on the Hue API v2

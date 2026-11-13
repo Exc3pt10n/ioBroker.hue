@@ -89,6 +89,18 @@ describe('model', () => {
         expect(fallback.obj.common?.name).to.equal('Hue Bridge');
     });
 
+    it('lists the lights of rooms and zones in native', () => {
+        const model = buildModel(new ResourceIndex(createFixture()), defaultOptions);
+        const native = (id: string): Record<string, any> => model.objects.find(o => o.id === id)!.obj.native;
+
+        // the ids are the native ids of the light channels
+        const lightIds = (...ids: string[]): string[] => ids.map(id => native(`lights.${id}`).id);
+        expect(native('rooms.Living_room').lights).to.have.members(lightIds('Desk', 'Hall'));
+        expect(native('zones.Work').lights).to.deep.equal(lightIds('Desk'));
+        // not needed for the group of all lights
+        expect(native('all')).to.not.have.property('lights');
+    });
+
     it('respects ignoreGroups and ignoreScenes', () => {
         const index = new ResourceIndex(createFixture());
 

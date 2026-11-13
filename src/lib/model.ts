@@ -781,6 +781,8 @@ function buildGroups(
                 id: group.id,
                 type: group.type,
                 groupedLightId: groupedLight.id,
+                // ids of the light services (native.id of the light channels), e.g. for visualizations
+                ...(group.type === 'bridge_home' ? {} : { lights: members.map(l => l.id) }),
             }),
             ...lightControlObjects(id, capabilitiesOf(members), true),
             stateObject(`${id}.allOn`, { name: 'All lights on', type: 'boolean', role: 'indicator' }),
