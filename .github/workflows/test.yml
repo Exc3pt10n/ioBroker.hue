@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x, 24.x, 26.x]
+        node-version: [22.x, 24.x]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -30,22 +30,14 @@ jobs:
       - run: npm run build
       - run: npm test
 
-  # Integrationstest (startet eine echte js-controller-Instanz gegen eine simulierte Bridge)
-  # auf Linux und einmal auf Windows, um Plattformunterschiede abzudecken
+  # Integrationstest (startet eine echte js-controller-Instanz) – einmal genügt
   integration:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-            node-version: 22.x
-          - os: windows-latest
-            node-version: 24.x
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 22.x
           cache: npm
       - run: npm ci
       - run: npm run build

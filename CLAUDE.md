@@ -56,10 +56,11 @@ alles, was der Build braucht, muss in `devDependencies` stehen.
 ## Automatische Tests (GitHub Actions)
 
 `.github/workflows/test.yml` läuft für Pull Requests und Pushes auf `master` (nicht für jeden Branch-Push,
-sonst doppelt): Lint, Typprüfung, Build und Tests auf den unterstützten Node-Versionen (22, 24, 26),
-der Integrationstest auf Linux (Node 22) und Windows (Node 24). Ältere Läufe desselben Branches werden
-abgebrochen. `.github/workflows/tag-release.yml` setzt nach jedem Push auf `master` den Versions-Tag
-(siehe oben). Wird die Node-Mindestversion geändert: `engines` in `package.json`/`package-lock.json`,
+sonst doppelt): Lint, Typprüfung, Build und Tests auf den unterstützten Node-Versionen (22, 24),
+der Integrationstest einmal auf Node 22. Ältere Läufe desselben Branches werden abgebrochen.
+`.github/workflows/tag-release.yml` setzt nach jedem Push auf `master` den Versions-Tag (siehe oben).
+Beide Workflows entsprechen denen von ioBroker.SmartVis (dort Branch `main`) und sollen synchron bleiben.
+Wird die Node-Mindestversion geändert: `engines` in `package.json`/`package-lock.json`,
 README (Voraussetzungen) und die Matrix im Workflow gemeinsam anpassen.
 
 ## Prüfen vor dem Push
