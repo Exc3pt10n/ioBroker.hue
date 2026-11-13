@@ -1,113 +1,35 @@
 {
   "common": {
-    "name": "hue",
-    "version": "3.17.4",
+    "name": "hue-v2",
+    "version": "4.0.0-alpha.0",
     "tier": 2,
     "news": {
-      "3.17.4": {
-        "en": "support to install from github has been dropped",
-        "de": "Installation über Github wird nicht mehr unterstützt",
-        "ru": "поддержка установки с github прекращена",
-        "pt": "o suporte à instalação do github foi retirado",
-        "nl": "ondersteuning voor de installatie via github is ingetrokken",
-        "fr": "l'aide à l'installation depuis Github a été supprimée",
-        "it": "il supporto per l'installazione da GitHub è caduto",
-        "es": "se ha retirado el soporte para instalar desde github",
-        "pl": "obsługa instalacji z githuba została porzucona",
-        "uk": "підтримка встановлення з github припинена",
-        "zh-cn": "对从 github 安装的支持已取消"
-      },
-      "3.17.2": {
-        "en": "Fixed user creation not updating configuration field automatically- #776",
-        "de": "Behoben, bei der Benutzererstellung das Feld nicht automatisch ändert. #776",
-        "ru": "Исправлено, что создание пользователя не обновляло поле конфигурации автоматически- #776",
-        "pt": "Criação de usuário corrigida sem atualização automática- #776",
-        "nl": "Het probleem is opgelost dat een gebruiker het configuratieveld niet automatisch bijwerkte- #776",
-        "fr": "Corrigé, le champ de configuration ne se mettait pas à jour automatiquement- #776",
-        "it": "Creazione utente fissa che non aggiorna automaticamente- #776",
-        "es": "Se corrigió la creación de usuarios que no actualizaba el campo de configuración automáticamente - #776",
-        "pl": "Poprawiono tworzenie użytkownika, które nie aktualizuje automatycznie pola konfiguracji- #776",
-        "uk": "Виправлено створення користувача, яке автоматично не оновлює поле конфігурації- #776",
-        "zh-cn": "修复了创建用户时无法自动更新配置字段的问题-#776"
-      },
-      "3.17.1": {
-        "en": "fixed: ct object min/max being stricter than the adapter's supported color temperature range, causing \"less than min\"/\"greater than max\" warnings (closes #586)\nAdapter requires node.js >= 22 now\nAdapter requires admin >= 7.7.22 now\nAdapter requires js-controller >= 6.0.11 now",
-        "de": "behoben: ct-Objekt min/max ist strenger als der vom Adapter unterstützte Farbtemperaturbereich, was zu Warnungen „unter min“ /\"größer als max“ führt (schließt #586)\nAdapter benötigt jetzt node.js >= 22\nAdapter benötigt jetzt admin >= 7.7.22\nAdapter benötigt jetzt JS-Controller >= 6.0.11",
-        "ru": "исправлено: значение min/max объекта ct превышало поддерживаемый адаптером диапазон цветовой температуры, что приводило к появлению предупреждений «меньше минимального»/«больше максимального» (закрывает #586)\nТеперь для адаптера требуется файл node.js >= 22\nДля адаптера теперь требуется администратор >= 7.7.22\nТеперь для адаптера требуется js-контроллер >= 6.0.11",
-        "pt": "fixo: o objeto ct min/max é mais rígido que a faixa de temperatura de cor suportada pelo adaptador, causando avisos “menor que min” /\"maior que max” (fecha #586)\nO adaptador exige node.js >= 2\nAgora o adaptador exige admin >= 7.7.2\nO adaptador exige js-controller >= 6.0.11",
-        "nl": "Opgelost: het min/max van het ct-object is strenger dan het kleurtemperatuurbereik dat door de adapter wordt ondersteund, waardoor de waarschuwingen „minder dan min” /\"groter dan max” zijn (sluit #586)\nVoor de adapter is nu node.js >= 22 nodig\nAdapter vereist nu admin >= 7.7.22\nVoor de adapter is nu een js-controller >= 6.0.11 nodig",
-        "fr": "corrigé : l'objet CT min/max était plus strict que la plage de température de couleur autorisée par l'adaptateur, ce qui provoquait un avertissement « inférieur à min » /« supérieur au maximum » (ferme #586)\nAdapter nécessite node.js >= 22\nAdapter nécessite admin >= 7.7.22\nAdapter nécessite JS-Controller >= 6.0.11",
-        "it": "risolto: l'oggetto ct min/max è più rigoroso della gamma di colori supportata dall'adattatore, causando avvisi «minore di min» /\"max» (chiude #586)\nAdapter richiede node.js =2 ora\nAdapter richiede admin >= 7.7.2 ora\nAdapter richiede js-controller >= 6.0.11 ora",
-        "es": "fijo: el objeto CT min/max era más estricto que el rango de temperatura de color admitido por el adaptador y provocaba advertencias de «menor que mínimo» /\"mayor que máximo» (cierra #586)\nEl adaptador necesita node.js >= 22 ahora\nEl adaptador necesita admin >= 7.7.22 ahora\nEl adaptador ahora requiere js-controller >= 6.0.11",
-        "pl": "naprawiono: obiekt ct min/max jest bardziej rygorystyczny niż obsługiwany zakres temperatur barwowych adaptera, powodując ostrzeżenia „mniej niż min” /„ większe niż max” (zamyka #586)\nAdapter wymaga teraz node.js >= 22\nAdapter wymaga administratora >= 7.7.22 teraz\nAdapter wymaga kontrolera js->= 6.0.11 teraz",
-        "uk": "виправлено: об'єкт ct min/max суворіший за підтримуваний діапазон колірних температур адаптера, викликаючи попередження «менше хв» /\"більше, ніж макс» (закриває #586)\nАдаптер вимагає node.js >= 22 зараз\nАдаптер вимагає адміністратора >= 7.7.22 зараз\nАдаптер вимагає js-контролера >= 6.0.11 зараз",
-        "zh-cn": "修复：ct 对象的最小值/最大值比适配器支持的色温范围更严格，导致 “小于最小值”/“大于最大值” 警告（关闭 #586）\n适配器现在需要 node.js >= 22\n适配器现在需要管理员 >= 7.7.22\n适配器现在需要 js-controller >= 6.0.11"
-      },
-      "3.16.2": {
-        "en": "do not try to use v2 functionality on legacy Hue bridges (closes #720)",
-        "de": "nicht versuchen, v2 Funktionalität auf Vermächtnis zu verwenden Hue Brücken (schließt #720)",
-        "ru": "не пытайтесь использовать функциональность v2 в наследии Мосты Хюэ (закрывает #720)",
-        "pt": "não tente usar a funcionalidade v2 no legado Pontes Hue (fecha #720)",
-        "nl": "geen gebruik maken van v2 functionaliteit op legacy Tintbruggen (sluit #720)",
-        "fr": "n'essayez pas d'utiliser la fonctionnalité v2 sur le legs Ponts de Hue (ferme #720)",
-        "it": "non cercare di utilizzare la funzionalità v2 su legacy ponti Hue (chiude n. 720)",
-        "es": "no trate de utilizar la funcionalidad v2 en el legado Puentes de Hue (closes #720)",
-        "pl": "nie próbuj używać funkcji v2 na dziedzictwie Mosty odcieniowe (zamyka # 720)",
-        "uk": "не намагайтеся використовувати функцію v2 на Legacy Хати міст (закривається #720)",
-        "zh-cn": "不尝试在遗留物上使用 v2 功能 彩色桥梁( 关闭 # 720)"
-      },
-      "3.16.1": {
-        "en": "fix if no tamper report is present on state creation",
-        "de": "fix, wenn kein manipulationsbericht vorhanden ist",
-        "ru": "исправить, если нет отчета о фальсификации о создании государства",
-        "pt": "corrigir se nenhum relatório do tamper está presente na criação do estado",
-        "nl": "vast te stellen als er geen manipulatierapport aanwezig is bij het aanmaken van de staat",
-        "fr": "corriger si aucun rapport d'altération n'est présent sur la création de l'état",
-        "it": "risolvere se nessun rapporto di manomissione è presente sulla creazione di stato",
-        "es": "arreglar si no hay informe de manipulación está presente en la creación del estado",
-        "pl": "ustala, czy nie ma raportu o utworzeniu państwa",
-        "uk": "фіксувати, якщо звіт не присутній на державному творі",
-        "zh-cn": "如果没有关于国家创建的篡改报告, 则修复"
-      },
-      "3.16.0": {
-        "en": "added tamper states for contact sensors",
-        "de": "zusätzliche verstärkerzustände für kontaktsensoren",
-        "ru": "добавлены состояния подделки для контактных датчиков",
-        "pt": "estados do tamper adicionados para sensores de contato",
-        "nl": "toegevoegd knoeitoestanden voor contactsensoren",
-        "fr": "des états d'altération supplémentaires pour les capteurs de contact",
-        "it": "stati di manomissione aggiunti per sensori di contatto",
-        "es": "estados de tamper agregados para sensores de contacto",
-        "pl": "dodane stany manipulacji czujników kontaktowych",
-        "uk": "додано стани тампера для контактних датчиків",
-        "zh-cn": "接触传感器添加的篡改状态"
-      },
-      "3.15.0": {
-        "en": "added support for contact sensors",
-        "de": "unterstützung für kontaktsensoren",
-        "ru": "добавлена поддержка контактных датчиков",
-        "pt": "suporte adicional para sensores de contato",
-        "nl": "extra ondersteuning voor contactsensoren",
-        "fr": "un support supplémentaire pour les capteurs de contact",
-        "it": "supporto aggiunto per sensori di contatto",
-        "es": "soporte añadido para sensores de contacto",
-        "pl": "dodane wsparcie dla czujników kontaktowych",
-        "uk": "додано підтримку датчиків контакту",
-        "zh-cn": "为接触传感器添加支持"
+      "4.0.0-alpha.0": {
+        "en": "Fork of the hue adapter based on the Hue API v2, can be installed in parallel to the official hue adapter",
+        "de": "Fork des hue-Adapters auf Basis der Hue API v2, kann parallel zum offiziellen hue-Adapter installiert werden",
+        "ru": "Форк адаптера hue на основе Hue API v2, может устанавливаться параллельно с официальным адаптером hue",
+        "pt": "Fork do adaptador hue baseado na Hue API v2, pode ser instalado em paralelo com o adaptador hue oficial",
+        "nl": "Fork van de hue-adapter op basis van de Hue API v2, kan naast de officiële hue-adapter worden geïnstalleerd",
+        "fr": "Fork de l'adaptateur hue basé sur l'API Hue v2, peut être installé en parallèle de l'adaptateur hue officiel",
+        "it": "Fork dell'adattatore hue basato sulla Hue API v2, installabile in parallelo all'adattatore hue ufficiale",
+        "es": "Fork del adaptador hue basado en la Hue API v2, se puede instalar en paralelo al adaptador hue oficial",
+        "pl": "Fork adaptera hue oparty na Hue API v2, można go zainstalować równolegle z oficjalnym adapterem hue",
+        "uk": "Форк адаптера hue на основі Hue API v2, можна встановити паралельно з офіційним адаптером hue",
+        "zh-cn": "基于 Hue API v2 的 hue 适配器分支，可与官方 hue 适配器并行安装"
       }
     },
     "titleLang": {
-      "en": "Philips Hue Bridge",
-      "de": "Philips Hue-Bridge",
-      "ru": "Philips Hue Bridge",
-      "pt": "Philips Hue Bridge",
-      "nl": "Philips Hue Bridge",
-      "fr": "Philips Hue Bridge",
-      "it": "Philips Hue Bridge",
-      "es": "Philips Hue Bridge",
-      "pl": "Philips Hue Bridge",
-      "zh-cn": "飞利浦 Hue 桥",
-      "uk": "Philips Hue Bridge"
+      "en": "Philips Hue Bridge (API v2)",
+      "de": "Philips Hue-Bridge (API v2)",
+      "ru": "Philips Hue Bridge (API v2)",
+      "pt": "Philips Hue Bridge (API v2)",
+      "nl": "Philips Hue Bridge (API v2)",
+      "fr": "Philips Hue Bridge (API v2)",
+      "it": "Philips Hue Bridge (API v2)",
+      "es": "Philips Hue Bridge (API v2)",
+      "pl": "Philips Hue Bridge (API v2)",
+      "zh-cn": "飞利浦 Hue 桥 (API v2)",
+      "uk": "Philips Hue Bridge (API v2)"
     },
     "desc": {
       "en": "Connects Philips Hue lights, sensors, switches, rooms, zones and scenes via the Hue Bridge (API v2)",
@@ -141,18 +63,9 @@
         "js-controller": ">=6.0.11"
       }
     ],
-    "plugins": {
-      "sentry": {
-        "dsn": "https://032355a1870c46b9a3fb6a879412bd2f@sentry.iobroker.net/42",
-        "pathWhitelist": [],
-        "errorBlacklist": [
-          "SyntaxError"
-        ]
-      }
-    },
     "enabled": true,
     "compact": true,
-    "readme": "https://github.com/iobroker-community-adapters/ioBroker.hue/blob/master/README.md",
+    "readme": "https://github.com/Exc3pt10n/ioBroker.hue-v2/blob/master/README.md",
     "loglevel": "info",
     "keywords": [
       "philips",
@@ -166,56 +79,13 @@
       "config": "json"
     },
     "icon": "hue.jpeg",
-    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.hue/master/admin/hue.jpeg",
+    "extIcon": "https://raw.githubusercontent.com/Exc3pt10n/ioBroker.hue-v2/master/admin/hue.jpeg",
     "type": "lighting",
     "connectionType": "local",
     "dataSource": "push",
-    "nogit": true,
     "globalDependencies": [
       {
         "admin": ">=7.7.22"
-      }
-    ],
-    "messages": [
-      {
-        "condition": {
-          "operand": "and",
-          "rules": [
-            "oldVersion<4.0.0",
-            "newVersion>=4.0.0"
-          ]
-        },
-        "title": {
-          "en": "Breaking change: Hue API v2",
-          "de": "Inkompatible Änderung: Hue API v2",
-          "ru": "Критическое изменение: Hue API v2",
-          "pt": "Alteração incompatível: Hue API v2",
-          "nl": "Ingrijpende wijziging: Hue API v2",
-          "fr": "Changement majeur : API Hue v2",
-          "it": "Modifica incompatibile: Hue API v2",
-          "es": "Cambio importante: Hue API v2",
-          "pl": "Zmiana niekompatybilna: Hue API v2",
-          "uk": "Несумісна зміна: Hue API v2",
-          "zh-cn": "重大变更：Hue API v2"
-        },
-        "text": {
-          "en": "Version 4 uses the Hue API v2 exclusively. The complete object structure changes, all old objects of the instance are deleted on the first start and scripts, visualizations, aliases and history settings have to be adjusted. Port, SSL, polling and legacy structure options were removed. Please read the README before updating.",
-          "de": "Version 4 verwendet ausschließlich die Hue API v2. Die komplette Objektstruktur ändert sich, alle alten Objekte der Instanz werden beim ersten Start gelöscht und Skripte, Visualisierungen, Aliase und History-Einstellungen müssen angepasst werden. Die Optionen Port, SSL, Polling und Legacy-Struktur entfallen. Bitte vor dem Update die README lesen.",
-          "ru": "Версия 4 использует только Hue API v2. Структура объектов полностью меняется, все старые объекты экземпляра удаляются при первом запуске, скрипты, визуализации, алиасы и настройки истории нужно адаптировать. Параметры порта, SSL, опроса и устаревшей структуры удалены. Перед обновлением прочитайте README.",
-          "pt": "A versão 4 usa exclusivamente a Hue API v2. Toda a estrutura de objetos muda, todos os objetos antigos da instância são eliminados no primeiro arranque e scripts, visualizações, aliases e configurações de histórico têm de ser ajustados. As opções de porta, SSL, polling e estrutura antiga foram removidas. Leia o README antes de atualizar.",
-          "nl": "Versie 4 gebruikt uitsluitend de Hue API v2. De volledige objectstructuur verandert, alle oude objecten van de instantie worden bij de eerste start verwijderd en scripts, visualisaties, aliassen en historie-instellingen moeten worden aangepast. De opties poort, SSL, polling en legacy-structuur zijn verwijderd. Lees de README voor het bijwerken.",
-          "fr": "La version 4 utilise exclusivement l'API Hue v2. Toute la structure des objets change, tous les anciens objets de l'instance sont supprimés au premier démarrage et les scripts, visualisations, alias et paramètres d'historique doivent être adaptés. Les options port, SSL, interrogation et structure héritée ont été supprimées. Veuillez lire le README avant la mise à jour.",
-          "it": "La versione 4 utilizza esclusivamente la Hue API v2. L'intera struttura degli oggetti cambia, tutti i vecchi oggetti dell'istanza vengono eliminati al primo avvio e script, visualizzazioni, alias e impostazioni della cronologia devono essere adattati. Le opzioni porta, SSL, polling e struttura legacy sono state rimosse. Leggere il README prima dell'aggiornamento.",
-          "es": "La versión 4 utiliza exclusivamente la Hue API v2. Cambia toda la estructura de objetos, todos los objetos antiguos de la instancia se eliminan en el primer inicio y hay que adaptar scripts, visualizaciones, alias y ajustes de historial. Se han eliminado las opciones de puerto, SSL, sondeo y estructura heredada. Lea el README antes de actualizar.",
-          "pl": "Wersja 4 korzysta wyłącznie z Hue API v2. Cała struktura obiektów się zmienia, wszystkie stare obiekty instancji zostaną usunięte przy pierwszym uruchomieniu, a skrypty, wizualizacje, aliasy i ustawienia historii trzeba dostosować. Usunięto opcje portu, SSL, odpytywania i starej struktury. Przed aktualizacją przeczytaj README.",
-          "uk": "Версія 4 використовує виключно Hue API v2. Структура об'єктів повністю змінюється, усі старі об'єкти екземпляра видаляються під час першого запуску, а скрипти, візуалізації, аліаси та налаштування історії потрібно адаптувати. Параметри порту, SSL, опитування та застарілої структури видалено. Перед оновленням прочитайте README.",
-          "zh-cn": "版本 4 仅使用 Hue API v2。整个对象结构发生变化，实例的所有旧对象将在首次启动时被删除，脚本、可视化、别名和历史设置需要调整。端口、SSL、轮询和旧结构选项已被移除。更新前请阅读 README。"
-        },
-        "level": "warn",
-        "buttons": [
-          "agree",
-          "cancel"
-        ]
       }
     ]
   },

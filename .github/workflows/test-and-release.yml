@@ -73,7 +73,3 @@ jobs:
           build: true
           # npm-token: ${{ secrets.NPM_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
-          sentry-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          sentry-project: 'iobroker-hue'
-          sentry-version-prefix: 'iobroker.hue'

@@ -34,8 +34,9 @@ tests.integration(path.join(__dirname, '..'), {
             let address: string;
             let harness: ReturnType<typeof getHarness>;
 
-            const getState = (id: string): Promise<ioBroker.State | null> => harness.states.getState(`hue.0.${id}`);
-            const getObject = (id: string): Promise<ioBroker.Object | null> => harness.objects.getObject(`hue.0.${id}`);
+            const getState = (id: string): Promise<ioBroker.State | null> => harness.states.getState(`hue-v2.0.${id}`);
+            const getObject = (id: string): Promise<ioBroker.Object | null> =>
+                harness.objects.getObject(`hue-v2.0.${id}`);
 
             before(async function () {
                 this.timeout(60_000);
@@ -43,18 +44,18 @@ tests.integration(path.join(__dirname, '..'), {
                 harness = getHarness();
 
                 // an object of the old v1 structure which has to be cleaned up
-                await harness.objects.setObject('hue.0.Desk', {
+                await harness.objects.setObject('hue-v2.0.Desk', {
                     type: 'channel',
                     common: { name: 'Desk' },
                     native: { id: '1' },
                 });
-                await harness.objects.setObject('hue.0.Desk.bri', {
+                await harness.objects.setObject('hue-v2.0.Desk.bri', {
                     type: 'state',
                     common: { name: 'bri', type: 'number', role: 'level.dimmer', read: true, write: true },
                     native: {},
                 });
 
-                await harness.changeAdapterConfig('hue', { native: { bridge: address, user: APP_KEY } });
+                await harness.changeAdapterConfig('hue-v2', { native: { bridge: address, user: APP_KEY } });
                 await harness.startAdapterAndWait(true);
                 await waitFor(() => bridge.connectedStreams > 0);
             });
@@ -83,7 +84,7 @@ tests.integration(path.join(__dirname, '..'), {
             });
 
             it('sends commands to the bridge and acknowledges them', async () => {
-                await harness.states.setState('hue.0.lights.Desk.brightness', { val: 20, ack: false });
+                await harness.states.setState('hue-v2.0.lights.Desk.brightness', { val: 20, ack: false });
 
                 const request = await waitFor(() =>
                     bridge.requests.find(r => r.method === 'PUT' && r.path === '/clip/v2/resource/light/light-desk'),
@@ -95,7 +96,7 @@ tests.integration(path.join(__dirname, '..'), {
             });
 
             it('activates scenes via the command state of a group', async () => {
-                await harness.states.setState('hue.0.rooms.Living_room.command', {
+                await harness.states.setState('hue-v2.0.rooms.Living_room.command', {
                     val: JSON.stringify({ scene: 'Relax', transition: 1000 }),
                     ack: false,
                 });
@@ -171,7 +172,7 @@ tests.integration(path.join(__dirname, '..'), {
                 await harness.enableSendTo();
 
                 const send = (): Promise<any> =>
-                    new Promise(resolve => harness.sendTo('hue.0', 'createUser', { ip: address }, resolve));
+                    new Promise(resolve => harness.sendTo('hue-v2.0', 'createUser', { ip: address }, resolve));
 
                 expect(await send()).to.deep.equal({ error: 'Not open' });
 

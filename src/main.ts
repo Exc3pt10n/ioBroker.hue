@@ -44,7 +44,7 @@ class Hue extends utils.Adapter {
      * @param options adapter options
      */
     public constructor(options: Partial<utils.AdapterOptions> = {}) {
-        super({ ...options, name: 'hue' });
+        super({ ...options, name: 'hue-v2' });
 
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
@@ -380,7 +380,7 @@ class Hue extends utils.Adapter {
                 }
 
                 try {
-                    const result = await createUser(ip, 'iobroker#hue');
+                    const result = await createUser(ip, 'iobroker#hue-v2');
                     if (result.success) {
                         this.log.info('Created new user on the bridge');
                         respond({ native: { user: result.appKey }, saveConfig: true });

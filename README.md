@@ -1,24 +1,33 @@
 ![Logo](admin/hue.jpeg)
-# ioBroker Philips Hue Bridge Adapter
+# ioBroker Philips Hue adapter (API v2)
 
-![Number of Installations](http://iobroker.live/badges/hue-installed.svg)
-![Number of Installations](http://iobroker.live/badges/hue-stable.svg)
-[![NPM version](http://img.shields.io/npm/v/iobroker.hue.svg)](https://www.npmjs.com/package/iobroker.hue)
-
-![Test and Release](https://github.com/iobroker-community-adapters/iobroker.hue/workflows/Test%20and%20Release/badge.svg)
-[![Translation status](https://weblate.iobroker.net/widgets/adapters/-/hue/svg-badge.svg)](https://weblate.iobroker.net/engage/adapters/?utm_source=widget)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.hue.svg)](https://www.npmjs.com/package/iobroker.hue)
+![Test and Release](https://github.com/Exc3pt10n/ioBroker.hue-v2/workflows/Test%20and%20Release/badge.svg)
 
 > [!IMPORTANT]
-> This adapter cannot be installed from github
+> This is a fork of the official [hue adapter](https://github.com/iobroker-community-adapters/ioBroker.hue), rewritten for the Hue API v2.
+> It is called `hue-v2` and can be installed **in parallel** to the official `hue` adapter: its instances (`hue-v2.0`, ...) have their own namespace and do not touch the objects of `hue.0`.
 
-**This adapter uses the service [Sentry.io](https://sentry.io) to automatically report exceptions and code errors and new device schemas to me as the developer.** More details see below!
+## Installation
+The adapter is not available in the ioBroker repository. Build a package and install it manually:
 
-## What is Sentry.io and what is reported to the servers of that company?
-Sentry.io is a service for developers to get an overview about errors from their applications. Exactly this is implemented in this adapter.
+1. Build the package (requires Node.js >= 22):
+   ```bash
+   git clone https://github.com/Exc3pt10n/ioBroker.hue-v2.git
+   cd ioBroker.hue-v2
+   npm ci
+   npm pack
+   ```
+   This creates `iobroker.hue-v2-<version>.tgz`.
+2. Copy the file to your ioBroker host and install it as the user running ioBroker:
+   ```bash
+   cd /opt/iobroker
+   sudo -u iobroker -H npm install /path/to/iobroker.hue-v2-<version>.tgz --omit=dev
+   iobroker upload hue-v2
+   iobroker add hue-v2
+   ```
+3. Configure the new instance in the admin UI. Create a **new** user on the bridge for it (link button), so it does not share its application key with the official adapter.
 
-When the adapter crashes or another Code error happens, this error message that also appears in the ioBroker log is submitted to Sentry.
-When you have allowed ioBroker GmbH to collect diagnostic data, then also your installation ID (this is just a unique ID **without** any additional infos about you, email, name or such) is included. This allows Sentry to group errors and show how many unique users are affected by such an error. All of these helps me to provide error-free adapters that basically never crash.
+To update, install the new package the same way and restart the instance.
 
 ## Description
 This adapter connects your Philips Hue bridge with ioBroker. It controls Philips Hue lights, Friends of Hue lamps, plugs and
@@ -53,15 +62,15 @@ Objects of devices which are removed from the bridge are deleted automatically.
 
 | Object                                  | Description                                                                         |
 |-----------------------------------------|-------------------------------------------------------------------------------------|
-| `hue.0.lights.<name>`                   | A light                                                                             |
-| `hue.0.rooms.<name>`                    | A room of the Hue app                                                               |
-| `hue.0.zones.<name>`                    | A zone of the Hue app                                                               |
-| `hue.0.all`                             | All lights of the bridge                                                            |
-| `hue.0.rooms.<name>.scenes.<scene>`     | Button to activate a scene (same for zones)                                         |
-| `hue.0.rooms.<name>.smartScenes.<name>` | Switch to start/stop a smart scene (same for zones)                                 |
-| `hue.0.sensors.<name>`                  | Motion sensors, contact sensors, switches, dials, ...                               |
-| `hue.0.entertainment.<name>`            | Switch to start/stop streaming of an entertainment area                             |
-| `hue.0.automations.<name>`              | Switch to enable/disable an automation of the Hue app                               |
+| `hue-v2.0.lights.<name>`                   | A light                                                                             |
+| `hue-v2.0.rooms.<name>`                    | A room of the Hue app                                                               |
+| `hue-v2.0.zones.<name>`                    | A zone of the Hue app                                                               |
+| `hue-v2.0.all`                             | All lights of the bridge                                                            |
+| `hue-v2.0.rooms.<name>.scenes.<scene>`     | Button to activate a scene (same for zones)                                         |
+| `hue-v2.0.rooms.<name>.smartScenes.<name>` | Switch to start/stop a smart scene (same for zones)                                 |
+| `hue-v2.0.sensors.<name>`                  | Motion sensors, contact sensors, switches, dials, ...                               |
+| `hue-v2.0.entertainment.<name>`            | Switch to start/stop streaming of an entertainment area                             |
+| `hue-v2.0.automations.<name>`              | Switch to enable/disable an automation of the Hue app                               |
 
 #### Lights, rooms and zones
 States are only created if at least one light supports the feature.
@@ -104,29 +113,30 @@ Supported keys are `on`, `brightness`, `brightnessDelta`, `colorTemperature`, `x
 
 ```javascript
 // dim to 30 % with a warm white within 2 seconds
-setState('hue.0.lights.Desk.command', JSON.stringify({ brightness: 30, colorTemperature: 2700, transition: 2000 }));
+setState('hue-v2.0.lights.Desk.command', JSON.stringify({ brightness: 30, colorTemperature: 2700, transition: 2000 }));
 
 // increase the brightness of a room by 10 %
-setState('hue.0.rooms.Living_room.command', JSON.stringify({ brightnessDelta: 10 }));
+setState('hue-v2.0.rooms.Living_room.command', JSON.stringify({ brightnessDelta: 10 }));
 
 // activate a scene by name (or id) with a transition time of 3 seconds and 60 % brightness
-setState('hue.0.rooms.Living_room.command', JSON.stringify({ scene: 'Relax', transition: 3000, brightness: 60 }));
+setState('hue-v2.0.rooms.Living_room.command', JSON.stringify({ scene: 'Relax', transition: 3000, brightness: 60 }));
 ```
 
-### Migration from version 3
-Version 4 is a complete rewrite based on the Hue API v2 and **not compatible** with version 3:
-- The object structure is completely new. All objects of the old structure are deleted on the first start, so scripts, visualizations, aliases and history settings have to be adjusted.
+### Differences to the official hue adapter (version 3)
+This adapter is a complete rewrite based on the Hue API v2 and **not compatible** with the official hue adapter:
+- The object structure is completely new, scripts, visualizations, aliases and history settings have to be adjusted when switching.
 - `bri` (0-254) and `level` were replaced by `brightness` (0-100 %), `ct` by `colorTemperature` (Kelvin), `r`/`g`/`b` by `rgb` (hex). `hue` and `sat` do not exist anymore, because the Hue API v2 only works with xy colors.
 - Button events are reported as text (e.g. `short_release`) instead of numeric codes like `1002`.
 - The options port, SSL, polling, polling interval, legacy structure, native turn on/off behaviour, ignore Osram and sync software sensors were removed. The lights always turn on with their last brightness, like in the Hue app.
 - CLIP software sensors are not supported by the Hue API v2. Automations of the Hue app can be enabled and disabled below `automations` instead.
-- The user created by version 3 can still be used.
+- A user created for the official adapter could be used as well, but a separate user is recommended.
 
 ## Changelog
 
 ### **WORK IN PROGRESS**
 - (copilot) Adapter requires node.js >= 22.19.0 now
-- (claude) BREAKING: the adapter has been rewritten to use the Hue API v2 exclusively, see "Migration from version 3" for details
+- (claude) Renamed to `hue-v2`, so it can be installed in parallel to the official hue adapter
+- (claude) BREAKING: the adapter has been rewritten to use the Hue API v2 exclusively, see "Differences to the official hue adapter" for details
 - (claude) State changes are pushed by the bridge via the event stream, polling has been removed
 - (claude) Added support for zones, smart scenes, automations, tap dials, contact and tamper sensors
 - (claude) Commands are rate limited and merged to avoid overloading the bridge

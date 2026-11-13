@@ -1,6 +1,6 @@
 {
-  "name": "iobroker.hue",
-  "version": "3.17.4",
+  "name": "iobroker.hue-v2",
+  "version": "4.0.0-alpha.0",
   "description": "Connects Philips Hue lights, sensors, switches, rooms, zones and scenes via the Hue Bridge API v2",
   "author": "hobbyquaker <hq@ccu.io>",
   "contributors": [
@@ -10,7 +10,7 @@
     "Moritz Heusinger <moritz.heusinger@gmail.com>",
     "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
   ],
-  "homepage": "https://github.com/iobroker-community-adapters/ioBroker.hue",
+  "homepage": "https://github.com/Exc3pt10n/ioBroker.hue-v2",
   "license": "Apache-2.0",
   "keywords": [
     "ioBroker",
@@ -23,7 +23,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/iobroker-community-adapters/ioBroker.hue"
+    "url": "https://github.com/Exc3pt10n/ioBroker.hue-v2"
   },
   "engines": {
     "node": ">=22.19.0"
@@ -55,6 +55,7 @@
     "prebuild": "node -e \"require('node:fs').rmSync('build', { recursive: true, force: true })\"",
     "build:ts": "tsc -p tsconfig.build.json",
     "build": "npm run build:ts",
+    "prepack": "npm run build",
     "check": "tsc --noEmit",
     "lint": "eslint -c eslint.config.mjs .",
     "test:unit": "mocha -r ts-node/register \"test/unit/**/*.test.ts\" --exit",
@@ -68,7 +69,7 @@
     "release-major": "release-script major --yes"
   },
   "bugs": {
-    "url": "https://github.com/iobroker-community-adapters/ioBroker.hue/issues"
+    "url": "https://github.com/Exc3pt10n/ioBroker.hue-v2/issues"
   },
   "main": "build/main.js",
   "files": [
