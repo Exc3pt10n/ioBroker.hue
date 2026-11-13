@@ -1,9 +1,22 @@
 {
   "common": {
     "name": "hue-v2",
-    "version": "4.0.0-alpha.1",
+    "version": "4.0.0",
     "tier": 2,
     "news": {
+      "4.0.0": {
+        "en": "First stable release of the adapter based on the Hue API v2",
+        "de": "Erste stabile Version des Adapters auf Basis der Hue API v2",
+        "ru": "Первая стабильная версия адаптера на основе Hue API v2",
+        "pt": "Primeira versão estável do adaptador baseado na Hue API v2",
+        "nl": "Eerste stabiele versie van de adapter op basis van de Hue API v2",
+        "fr": "Première version stable de l'adaptateur basé sur l'API Hue v2",
+        "it": "Prima versione stabile dell'adattatore basato sulla Hue API v2",
+        "es": "Primera versión estable del adaptador basado en la Hue API v2",
+        "pl": "Pierwsza stabilna wersja adaptera opartego na Hue API v2",
+        "uk": "Перша стабільна версія адаптера на основі Hue API v2",
+        "zh-cn": "基于 Hue API v2 的适配器的首个稳定版本"
+      },
       "4.0.0-alpha.1": {
         "en": "Installation directly from GitHub via \"Install from custom URL\", the adapter is built during installation",
         "de": "Installation direkt aus GitHub über „Installieren aus eigener URL“, der Adapter wird bei der Installation gebaut",

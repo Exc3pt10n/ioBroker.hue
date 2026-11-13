@@ -142,6 +142,9 @@ This adapter is a complete rewrite based on the Hue API v2 and **not compatible*
 	### **WORK IN PROGRESS**
 -->
 
+### 4.0.0 (2026-11-13)
+- (Exc3pt10n) First stable release of the adapter based on the Hue API v2
+
 ### 4.0.0-alpha.1 (2026-11-13)
 - (Exc3pt10n) Installation directly from GitHub via "Install from custom URL", npm builds the adapter during the installation
 - (Exc3pt10n) Version tags are created automatically after a merge, the npm release workflow of the official adapter was removed
